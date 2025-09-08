@@ -1,8 +1,9 @@
-FROM python:3.10-slim
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
-COPY . /app
 
-#RUN pip install --no-cache-dir -r requirements.txt
+# Copy the jar file from Maven build
+COPY target/my-multi-step-app-1.0.0.jar app.jar
 
-CMD ["python3", "app.py"]
+# Run the app
+ENTRYPOINT ["java", "-jar", "app.jar"]
